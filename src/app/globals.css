@@ -1,26 +1,58 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --scheels-red: #e31837;
+  --scheels-red-dark: #b81230;
+  --scheels-red-light: #ff2d4d;
+  --background: #0a0a0c;
+  --foreground: #f0eeeb;
+  --surface: #1a1a1e;
+  --surface-light: #242428;
+  --border: #2e2e34;
+  --muted: #8a8a94;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-scheels-red: var(--scheels-red);
+  --color-scheels-red-dark: var(--scheels-red-dark);
+  --color-scheels-red-light: var(--scheels-red-light);
+  --color-surface: var(--surface);
+  --color-surface-light: var(--surface-light);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* Scheels-branded range slider */
+input[type="range"] {
+  accent-color: var(--scheels-red);
+}
+
+/* Scheels-branded scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
 }
