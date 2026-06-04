@@ -1,3 +1,5 @@
+import type { LiveMap } from "@liveblocks/client";
+
 export const GRID_WIDTH = 200;
 export const GRID_HEIGHT = 200;
 export const CELL_SIZE = 6; // base cell size at zoom=1
@@ -13,7 +15,7 @@ declare global {
     Storage: {
       // Sparse pixel map: "x,y" -> "#hexcolor"
       // Only filled pixels are stored
-      pixels: Record<string, string>;
+      pixels: LiveMap<string, string>;
     };
   }
 }

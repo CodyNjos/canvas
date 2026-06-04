@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
+import { LiveMap } from "@liveblocks/client";
 import { LiveblocksProvider, RoomProvider, ClientSideSuspense } from "@liveblocks/react";
 import "./liveblocks.config"; // import for type augmentation
 
@@ -29,7 +30,7 @@ export function Room({
   roomId?: string;
 }) {
   return (
-    <LiveblocksProvider publicApiKey={process.env.NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY!}>
+    <LiveblocksProvider publicApiKey={process.env.NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY!} throttle={16}>
       <RoomProvider
         id={roomId}
         initialPresence={{
@@ -38,7 +39,7 @@ export function Room({
           color: userColor,
         }}
         initialStorage={{
-          pixels: {},
+          pixels: new LiveMap<string, string>(),
         }}
       >
         <ClientSideSuspense

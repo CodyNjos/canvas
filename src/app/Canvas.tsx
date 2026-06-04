@@ -32,15 +32,18 @@ export function Canvas() {
   const self = useSelf();
   const updateMyPresence = useUpdateMyPresence();
 
-  // Place a single pixel
+  // Place a single pixel — LiveMap.set() is a granular CRDT op,
+  // so concurrent writes to different keys never overwrite each other.
   const placePixel = useMutation(({ storage }, key: string, color: string) => {
-    const current = storage.get("pixels") as Record<string, string>;
-    storage.set("pixels", { ...current, [key]: color });
+    storage.get("pixels").set(key, color);
   }, []);
 
   // Clear all pixels
   const clearCanvas = useMutation(({ storage }) => {
-    storage.set("pixels", {});
+    const pixels = storage.get("pixels");
+    for (const key of [...pixels.keys()]) {
+      pixels.delete(key);
+    }
   }, []);
 
   // Calculate cell size based on zoom
