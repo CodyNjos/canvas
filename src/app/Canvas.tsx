@@ -195,15 +195,17 @@ export function Canvas() {
     const sy = e.clientY - rect.top;
     const { gx, gy } = screenToGrid(sx, sy);
 
-    // Click inside grid = place pixel, then start pan on drag
+    // Left click inside grid = place pixel
     if (e.button === 0 && gx >= 0 && gx < GRID_WIDTH && gy >= 0 && gy < GRID_HEIGHT) {
       placePixel(`${gx},${gy}`, color);
     }
 
-    // Any button starts pan on drag
-    setIsPanning(true);
-    panStart.current = { x: e.clientX, y: e.clientY, ox: offset.x, oy: offset.y };
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    // Right click starts pan
+    if (e.button === 2) {
+      setIsPanning(true);
+      panStart.current = { x: e.clientX, y: e.clientY, ox: offset.x, oy: offset.y };
+      (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    }
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
