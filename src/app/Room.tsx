@@ -24,7 +24,7 @@ const userColor = getRandomItem(RANDOM_COLORS);
 
 export function Room({
   children,
-  roomId = "canvas:default",
+  roomId = "canvas:v2",
 }: {
   children: ReactNode;
   roomId?: string;
