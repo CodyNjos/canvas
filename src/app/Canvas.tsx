@@ -258,6 +258,23 @@ export function Canvas() {
     setOffset(newOffset);
   };
 
+  // Name editing state
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [nameInput, setNameInput] = useState("");
+
+  const startEditingName = () => {
+    setNameInput((self?.presence?.name as string) ?? "");
+    setIsEditingName(true);
+  };
+
+  const submitName = () => {
+    const trimmed = nameInput.trim();
+    if (trimmed) {
+      updateMyPresence({ name: trimmed });
+    }
+    setIsEditingName(false);
+  };
+
   // Clear modal state
   const [showClearModal, setShowClearModal] = useState(false);
   const [clearPassword, setClearPassword] = useState("");
@@ -449,9 +466,29 @@ export function Canvas() {
           {connectionCount} user{connectionCount !== 1 ? "s" : ""} online
         </span>
         <span className="flex items-center gap-3">
-          <span>
-            {self?.presence?.name as string ?? "You"}
-          </span>
+          {isEditingName ? (
+            <input
+              type="text"
+              value={nameInput}
+              onChange={(e) => setNameInput(e.target.value)}
+              onBlur={submitName}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") submitName();
+                if (e.key === "Escape") setIsEditingName(false);
+              }}
+              autoFocus
+              maxLength={20}
+              className="w-24 rounded border border-border bg-background px-1 py-0.5 text-xs text-foreground outline-none focus:border-scheels-red/50"
+            />
+          ) : (
+            <button
+              onClick={startEditingName}
+              className="rounded px-1 py-0.5 text-xs text-muted transition-colors hover:bg-surface-light hover:text-foreground"
+              title="Click to change name"
+            >
+              {self?.presence?.name as string ?? "You"}
+            </button>
+          )}
           <span className="flex items-center gap-1.5">
             <span
               className="inline-block h-3 w-3 rounded-sm border border-border"
@@ -459,7 +496,7 @@ export function Canvas() {
             />
             {color}
           </span>
-          <span>Click to place &middot; Drag to pan &middot; Scroll to zoom</span>
+          <span>Click to place &middot; Right-drag to pan &middot; Scroll to zoom</span>
         </span>
       </div>
 
