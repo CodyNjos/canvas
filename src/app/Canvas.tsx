@@ -13,13 +13,13 @@ import { GRID_WIDTH, GRID_HEIGHT } from "./liveblocks.config";
 const BG_COLOR = "#0a0a0c";
 const GRID_BG_COLOR = "#1c1c22";
 const GRID_LINE_COLOR = "#3d3d4a";
-const GRID_BORDER_COLOR = "#e31837";
+const GRID_BORDER_COLOR = "#6366f1";
 
 export function Canvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const [color, setColor] = useState("#e31837");
+  const [color, setColor] = useState("#ef4444");
   const [zoom, setZoom] = useState(4);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [isPanning, setIsPanning] = useState(false);
@@ -95,7 +95,7 @@ export function Canvas() {
     ctx.fillStyle = GRID_BG_COLOR;
     ctx.fillRect(gridPixelX, gridPixelY, gridPixelW, gridPixelH);
 
-    // Outer border around the full grid — Scheels red accent
+    // Outer border around the full grid — accent color
     ctx.strokeStyle = GRID_BORDER_COLOR;
     ctx.lineWidth = 2;
     ctx.strokeRect(fullGridX - 1, fullGridY - 1, fullGridW + 2, fullGridH + 2);
@@ -301,7 +301,7 @@ export function Canvas() {
   const pixelCount = pixels ? Object.keys(pixels).length : 0;
 
   const COLOR_PRESETS = [
-    "#ffffff", "#e31837", "#ff6b35", "#ffd23f", "#22c55e",
+    "#ffffff", "#ef4444", "#ff6b35", "#ffd23f", "#22c55e",
     "#3b82f6", "#8b5cf6", "#ec4899", "#000000", "#6b7280",
     "#f97316", "#a3e635", "#06b6d4", "#c084fc", "#fb7185",
     "#18181c",
@@ -312,10 +312,6 @@ export function Canvas() {
       {/* Top bar */}
       <div className="flex h-12 items-center justify-between border-b border-border bg-surface px-4">
         <div className="flex items-center gap-3">
-          <span className="text-sm font-bold tracking-widest text-scheels-red">
-            SCHEELS
-          </span>
-          <span className="text-[10px] text-muted">|</span>
           <h1 className="text-sm font-medium text-foreground/80">
             Communal Canvas
           </h1>
@@ -329,7 +325,7 @@ export function Canvas() {
           </span>
           <button
             onClick={handleClear}
-            className="rounded px-3 py-1 text-xs font-medium text-muted transition-colors hover:bg-scheels-red/10 hover:text-scheels-red"
+            className="rounded px-3 py-1 text-xs font-medium text-muted transition-colors hover:bg-accent/10 hover:text-accent"
           >
             Clear All
           </button>
@@ -478,7 +474,7 @@ export function Canvas() {
               }}
               autoFocus
               maxLength={20}
-              className="w-24 rounded border border-border bg-background px-1 py-0.5 text-xs text-foreground outline-none focus:border-scheels-red/50"
+              className="w-24 rounded border border-border bg-background px-1 py-0.5 text-xs text-foreground outline-none focus:border-accent/50"
             />
           ) : (
             <button
@@ -504,7 +500,7 @@ export function Canvas() {
       {showClearModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
           <div className="w-80 rounded-lg border border-border bg-surface p-6 shadow-2xl">
-            <h2 className="mb-1 text-sm font-bold tracking-wide text-scheels-red">
+            <h2 className="mb-1 text-sm font-bold tracking-wide text-accent">
               CLEAR CANVAS
             </h2>
             <p className="mb-4 text-xs text-muted">
@@ -522,12 +518,12 @@ export function Canvas() {
               autoFocus
               className={`mb-3 w-full rounded border bg-background px-3 py-2 text-sm text-foreground outline-none transition-colors ${
                 clearError
-                  ? "border-scheels-red"
-                  : "border-border focus:border-scheels-red/50"
+                  ? "border-accent"
+                  : "border-border focus:border-accent/50"
               }`}
             />
             {clearError && (
-              <p className="mb-3 text-xs text-scheels-red">Wrong password.</p>
+              <p className="mb-3 text-xs text-accent">Wrong password.</p>
             )}
             <div className="flex justify-end gap-2">
               <button
@@ -538,7 +534,7 @@ export function Canvas() {
               </button>
               <button
                 onClick={handleClearSubmit}
-                className="rounded bg-scheels-red px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-scheels-red-dark"
+                className="rounded bg-accent px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-accent-dark"
               >
                 Clear
               </button>

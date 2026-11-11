@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --scheels-red: #e31837;
-  --scheels-red-dark: #b81230;
-  --scheels-red-light: #ff2d4d;
+  --accent: #6366f1;
+  --accent-dark: #4f46e5;
+  --accent-light: #818cf8;
   --background: #0a0a0c;
   --foreground: #f0eeeb;
   --surface: #1a1a1e;
@@ -15,9 +15,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-scheels-red: var(--scheels-red);
-  --color-scheels-red-dark: var(--scheels-red-dark);
-  --color-scheels-red-light: var(--scheels-red-light);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-accent-light: var(--accent-light);
   --color-surface: var(--surface);
   --color-surface-light: var(--surface-light);
   --color-border: var(--border);
@@ -34,12 +34,12 @@ body {
   overflow: hidden;
 }
 
-/* Scheels-branded range slider */
+/* Accent-colored range slider */
 input[type="range"] {
-  accent-color: var(--scheels-red);
+  accent-color: var(--accent);
 }
 
-/* Scheels-branded scrollbar */
+/* Accent-colored scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }

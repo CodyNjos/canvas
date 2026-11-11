@@ -13,11 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SCHEELS Communal Canvas",
+  title: "Communal Canvas",
   description: "A shared drawing canvas — draw together in real time",
-  icons: {
-    icon: "https://www.scheels.com/favicon.ico",
-  },
 };
 
 export default function RootLayout({

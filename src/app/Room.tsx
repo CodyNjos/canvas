@@ -45,8 +45,8 @@ export function Room({
         <ClientSideSuspense
           fallback={
             <div className="flex h-screen flex-col items-center justify-center bg-background">
-              <span className="mb-3 text-sm font-bold tracking-widest text-scheels-red">
-                SCHEELS
+              <span className="mb-3 text-sm font-bold tracking-widest text-accent">
+                COMMUNAL CANVAS
               </span>
               <span className="text-xs text-muted">Loading canvas...</span>
             </div>
